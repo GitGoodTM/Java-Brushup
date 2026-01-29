@@ -6,7 +6,7 @@ public class PolymorphismExample {
         // Objects of a subclass can be treated as objects of a common superclass
         // will work on Interfaces as well
 
-        Car car = new Car();
+        Car car = new Car("Alto","Suzuki","i4");
         Bike bike = new Bike();
 
         //Car[] cars = {car,bike};
@@ -30,7 +30,19 @@ public class PolymorphismExample {
         type=(scanner.nextLine()).toLowerCase();
 
         if(type.equals("car")){
-            vehicle = new Car();
+            String name;
+            String company;
+            String engineType;
+            System.out.println("Enter new car details:");
+            System.out.print("Name: ");
+            name=scanner.nextLine();
+            System.out.print("Make: ");
+            company=scanner.nextLine();
+            System.out.println("Type of Engine");
+            engineType=scanner.nextLine();
+
+
+            vehicle = new Car(name,company,engineType);
             vehicle.name();
         }else if (type.equals("bike")){
             vehicle = new Bike();
