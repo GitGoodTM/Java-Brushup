@@ -9,4 +9,20 @@ public class Car extends Vehicle{
     void name(){
         System.out.println("You own an Alto");
     }
+
+    private String newCar;
+
+    public String getNewCar() {
+        return newCar;
+    }
+
+    public void setNewCar(String newCar) {
+        this.newCar = newCar;
+    }
+
+    private final String fuel = "Petrol"; // cannot be assigned anything else
+
+    public String getFuel() {
+        return fuel;
+    }
 }

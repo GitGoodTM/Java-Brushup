@@ -39,5 +39,8 @@ public class PolymorphismExample {
             System.out.println("Invalid input");
         }
 
+        System.out.print("Add name of new Car: ");
+        car.setNewCar(scanner.nextLine());
+        System.out.println("Your new car is an "+ car.getNewCar());
     }
 }
