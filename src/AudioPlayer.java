@@ -13,6 +13,9 @@ public class AudioPlayer {
         String audioFilePath = "src\\The Great Southern Trendkill.wav";
         File file = new File(audioFilePath);
 
+
+        //what's happening
+
         try(Scanner scanner = new Scanner(System.in);
             AudioInputStream audio = AudioSystem.getAudioInputStream(file)){
 
