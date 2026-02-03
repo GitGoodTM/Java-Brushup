@@ -1,19 +1,32 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Hangman {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         // Hangman game
 
-        String word = "word";
+        String filePath = "src\\words.txt";
+        ArrayList<String> words = new ArrayList<>();
 
-        Scanner scanner = new Scanner(System.in);
-        ArrayList<Character> wordState = new ArrayList<>();
-        int wrongGuesses = 0;
-
-        for(int i=0; i<word.length(); i++){
-            wordState.add('_');
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))){
+            String line;
+            while ((line = reader.readLine()) != null){
+                words.add(line.trim());
+            }
+        }catch (FileNotFoundException e){
+            System.out.println("File not found");
+        }catch (IOException e) {
+            System.out.println("Something went wrong");;
         }
+
+        Random random = new Random();
+        char option = 'y';
+        Scanner scanner = new Scanner(System.in);
 
         System.out.println("""
                 *****************************
@@ -21,44 +34,58 @@ public class Hangman {
                 *****************************
                 """);
 
-        while (wrongGuesses<6){
-            System.out.print("Word : ");
+        while (option == 'y'){
+            String word = words.get(random.nextInt(words.size()));
 
-            for(char c: wordState){
-                System.out.print(c + " ");
+            ArrayList<Character> wordState = new ArrayList<>();
+            int wrongGuesses = 0;
+
+            for(int i=0; i<word.length(); i++){
+                wordState.add('_');
             }
-            System.out.println();
 
-            System.out.println(getHangmanArt(wrongGuesses));
+            while (wrongGuesses<6){
+                System.out.print("Word : ");
 
-            System.out.print("Guess a letter: ");
-            char guess = scanner.next().toLowerCase().charAt(0);
+                for(char c: wordState){
+                    System.out.print(c + " ");
+                }
+                System.out.println();
 
-            if(word.indexOf(guess)>=0){
-                System.out.println("Correct guess\n");
-                for(int i=0; i<word.length();i++){
-                    if (word.charAt(i) == guess){
-                        wordState.set(i, guess);
+                System.out.println(getHangmanArt(wrongGuesses));
+
+                System.out.print("Guess a letter: ");
+                char guess = scanner.next().toLowerCase().charAt(0);
+
+                if((word.toLowerCase()).indexOf(guess)>=0){
+                    System.out.println("Correct guess\n");
+                    for(int i=0; i<word.length();i++){
+                        if ((word).toLowerCase().charAt(i) == guess){
+                            wordState.set(i, guess);
+                        }
                     }
-                }
 
-                if (!wordState.contains('_')){
-                    System.out.println(getHangmanArt(wrongGuesses));
-                    System.out.println("You won!");
-                    System.out.println("The word was: "+ word);
-                    break;
-                }
+                    if (!wordState.contains('_')){
+                        System.out.println(getHangmanArt(wrongGuesses));
+                        System.out.println("You won!");
+                        System.out.println("The word was: "+ word);
+                        break;
+                    }
 
-            }else {
-                System.out.println("Wrong guess\n");
-                wrongGuesses++;
+                }else {
+                    System.out.println("Wrong guess\n");
+                    wrongGuesses++;
+                }
             }
-        }
 
-        if (wrongGuesses>=6){
-            System.out.println(getHangmanArt(wrongGuesses));
-            System.out.println("You lost");
-            System.out.println("The word was: "+ word);
+            if (wrongGuesses>=6){
+                System.out.println(getHangmanArt(wrongGuesses));
+                System.out.println("You lost");
+                System.out.println("The word was: "+ word);
+            }
+
+            System.out.print("Do you wanna continue? (y/n) ");
+            option=scanner.next().toLowerCase().charAt(0);
         }
 
         scanner.close();
