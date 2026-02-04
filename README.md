@@ -39,4 +39,5 @@ Bro Code: Java Complete course (12 hours)
 35. Write and read files
 36. Date, time, Timer and TimerTasks
 37. Anonymous Classes
-38. Generics
+38. Generic Classes
+39. HashMap
