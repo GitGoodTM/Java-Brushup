@@ -44,3 +44,11 @@ Bro Code: Java Complete course (12 hours)
 40. Enums
 41. Threading
 42. MultiThreading
+
+Telusko: Complete Java, Spring, and Microservices course
+1. Literals
+2. JDK, JRE, JVM
+3. Stack and Heap
+4. Mutable vs Immutable String
+5. StringBuffer and StringBuilder
+6. Static block
