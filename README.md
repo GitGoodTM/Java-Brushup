@@ -63,5 +63,6 @@ Telusko: Complete Java, Spring, and Microservices course
 15. Ducking the exception
 16. Class.forName("className")
 17. e.printStackTrace();
-
-Currently, I am at 10:03:38
+18. Linear Search
+19. Binary Search
+20. Search on a Rotated Sorted Array
