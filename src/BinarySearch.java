@@ -25,13 +25,13 @@ public class BinarySearch {
         int left=0, right=arr.length-1,result=-1;
         while(left<=right){
             int mid=left+(right-left)/2;
-            if(arr[mid]==target){
+            if (arr[mid]==target){
                 result=mid;
                 right=mid-1;
-            } else if (arr[mid]<target) {
-                left=mid+1;
-            } else {
+            } else if (arr[mid]>target) {
                 right=mid-1;
+            } else {
+                left=mid+1;
             }
         }
         return result;
@@ -58,20 +58,37 @@ public class BinarySearch {
     private static int searchRotated(int[] arr, int target) {
         int left=0, right=arr.length-1;
         while(left<=right){
-            int mid = left + (right-left)/2;
-            if(arr[mid]==target)return mid;
-            if(arr[left]<=arr[mid]){//sorting left half
-                if(target>=arr[left] && target<arr[mid]){
+            int mid=left+(right-left)/2;
+            if(arr[mid]==target){
+                return mid;
+            } else if (arr[left] <= arr[mid]) {// if left of the array is sorted
+                if(arr[left]<=target && target<=arr[mid]){
                     right=mid-1;
-                }else{
+                } else {
                     left=mid+1;
                 }
             } else {
-                if (target>arr[mid] && target<=arr[right]){
-                    left = mid + 1;
+                if (arr[mid]<=target && target<arr[right]){
+                    left=mid+1;
                 } else {
-                    right = mid -1;
+                    right=mid-1;
                 }
+            }
+        }
+        return -1;
+    }
+
+    // Binary Search on a descending array
+    private static int descendingBinarySearch(int[] arr, int target){
+        int left=0, right=arr.length-1;
+        while(left<right){
+            int mid=left+(right-left)/2;
+            if (arr[mid]==target){
+                return mid;
+            } else if(arr[mid]>target){
+                left=mid+1;
+            } else {
+                right=mid-1;
             }
         }
         return -1;
@@ -96,12 +113,24 @@ public class BinarySearch {
         System.out.println("2. Find Last/Right Boundary");
         System.out.println("The last occurrence if target "+repTarget+" is at "+findLast(sortedArrRep,repTarget)+"\n");
 
+        //Binary Search on a descending sorted array
+        System.out.println("3. Binary Search on a descending sorted array");
+        int[] dArr = {9,8,7,6,5,4,3,2,1};
+        int desTarget = 8;
+        System.out.println("The target: "+desTarget+" occurs at: "+descendingBinarySearch(dArr,desTarget)+" position\n");
+
         System.out.println("SOME IMPORTANT VARIANTS:\n");
 
         //Search in a Rotated Sorted Array, kind of a looped array
         System.out.println("1. Search in a Rotated Sorted Array");
         int[] RoSoArr= {4,5,6,7,8,9,1,2,3};
         int rotatedTarget=1;
-        System.out.println("The position of target: "+rotatedTarget+" in the given Rotated Sorted array is: "+searchRotated(RoSoArr,rotatedTarget));
+        System.out.println("The position of target: "+rotatedTarget+" in the given Rotated Sorted array is: "+searchRotated(RoSoArr,rotatedTarget)+"\n");
+
+        // Find First and Last occurrence of a given value
+        System.out.println("2. Find First and Last occurrence of a given value");
+        //sortedArrRep = {1,2,3,4,5,5,5,5,5,5,6,7,8,9,10};
+        //repTarget=5;
+        System.out.println("The first occurrence of the target: "+repTarget+" is at: "+findFirst(sortedArrRep,repTarget)+" position and last occurrence at: "+findLast(sortedArrRep,repTarget));
     }
 }
