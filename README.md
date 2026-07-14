@@ -66,3 +66,7 @@ Telusko: Complete Java, Spring, and Microservices course
 18. Linear Search
 19. Binary Search
 20. Search on a Rotated Sorted Array
+
+Others:
+1. Streams
+2. Functional Interfaces
