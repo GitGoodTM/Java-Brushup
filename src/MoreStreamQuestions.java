@@ -102,5 +102,54 @@ public class MoreStreamQuestions {
         employees.stream()
                 .filter(employee -> employee.getSalary()>=50000)
                 .forEach(System.out::println);
+
+        /*
+         * Q8. From a list of employees, Find top 2 highest paid employees.
+         */
+
+        System.out.println("\nQ8. From a list of employees, Find top 2 highest paid employees.\n");
+
+        employees.stream()
+                .sorted(Comparator.comparing(Employee::getSalary,Comparator.reverseOrder()))
+                .limit(2)
+                .forEach(System.out::println);
+
+        /*
+         * Q9. Sort the list of employees by their salary and then by their name
+         */
+        System.out.println("\nQ9. Sort the list of employees by their salary and then by their name\n");
+
+        employees.stream()
+                .sorted((employee1, employee2) ->{
+                    if(employee1.getSalary()>employee2.getSalary()){
+                        return 1;
+                    }else if (employee1.getSalary()<employee2.getSalary()) {
+                        return -1;
+                    } else {
+                        return employee1.getName().compareTo(employee2.getName());
+                    }
+                })
+                .forEach(System.out::println);
+
+        /*
+         * Q10. From a list of Integer, Find the frequency of each element in a list.
+         */
+        System.out.println("\nQ10. From a list of Integer, Find the frequency of each element in a list.\n");
+
+        integerListist = new ArrayList<>(Arrays.asList(3,2,3,4,4,1,2,1,1,1,5,6,5));
+        integerListist.stream()
+                .collect(Collectors.groupingBy(integer -> integer, Collectors.counting()))
+                .entrySet()
+                .forEach(System.out::println);
+        integerListist.clear();
+        /*
+         * Q11. Given a list of employees, count how many employees are in each department
+         */
+//        System.out.println("\nQ11. Given a list of employees, count how many employees are in each department\n");
+//
+//        employees.stream()
+//                .collect(Collectors.groupingBy(Employee::getDepartment, Collectors.counting()))
+//                .entrySet()
+//                .forEach(System.out::println);
     }
 }
